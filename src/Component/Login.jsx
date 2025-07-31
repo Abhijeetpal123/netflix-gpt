@@ -6,7 +6,6 @@ import React from "react";
 const Login = () => {
   const [showSignin, setShowSignin] = useState(false);
 
-  
   return (
     <div>
       <Header onSignInClick={() => setShowSignin(true)} />
@@ -29,7 +28,9 @@ const Login = () => {
           </p>
 
           {/* email form  */}
-          <form className="mt-6 w-full max-w-xl flex flex-col sm:flex-row gap-4 px-4">
+          <form
+           onSubmit={(e)=>{e.preventDefault}}
+          className="mt-6 w-full max-w-xl flex flex-col sm:flex-row gap-4 px-4">
             <input
               className="min-w-[250px] p-4 rounded-sm text-white flex-1 outline-none border border-transparent hover:border-white focus:border-white transition duration-200"
               type="email"

@@ -8,6 +8,15 @@
 - Sign in form
 - Form Validation
 - Use ref hooks
+- Fire Base Setup
+- Deploy Projects
+- Create Sign Up
+- Implement Sign in Sign up by user API
+- created our redux store with user slice
+- Implemented Signout 
+- Updated Profile  
+-  Fetch From TMDB Movies 
+
 
 # Featues
 

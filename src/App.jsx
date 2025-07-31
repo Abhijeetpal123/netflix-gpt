@@ -2,6 +2,8 @@ import Body from "./Component/Body.jsx";
 import "./App.css";
 import Signin from "./Component/Singin.jsx";
 import { useState } from "react";
+import { Provider } from "react-redux";
+import appStore from "./Utils/Appstore.jsx";
 
 function App() {
   const [ShowSignin, setShowSignin] = useState(false);
@@ -13,7 +15,9 @@ function App() {
   };
   return (
     <div>
-      <Body onSignInClick={handleSigninOpen} />
+      <Provider store={appStore}>
+        <Body onSignInClick={handleSigninOpen} />
+      </Provider>
 
       {ShowSignin && <Signin onClose={handleSigninClose} />}
     </div>

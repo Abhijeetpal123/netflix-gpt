@@ -1,16 +1,66 @@
-import { useState,useRef } from "react";
+import { useState, useRef } from "react";
 import React from "react";
-import  checkValidData  from "../Utils/Validate";
+import checkValidData from "../Utils/Validate";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../Utils/firebase";
+import { useNavigate } from "react-router-dom";
+
 function Signin({ onClose }) {
   const [message, setMessage] = useState(null);
-
+  const [isSignInForm, setIsSignInForm] = useState(true);
+  const navigate = useNavigate();
   const email = useRef(null);
   const password = useRef(null);
 
   const handleButtonClick = () => {
-  const result=  checkValidData(email.current.value,password.current.value)
-  setMessage(result)
-  
+    const result = checkValidData(email.current.value, password.current.value);
+
+    setMessage(result);
+
+    if (result) return;
+    //sign in sign up logic
+
+    if (!isSignInForm) {
+      // sign up logic
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log(user);
+          navigate("/browser");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setMessage(error.code + "-" + error.message);
+         
+        });
+    } else {
+      //  sign in logic
+
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+          navigate("/browser");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setMessage(error.code + "-" + error.message);
+        });
+    }
   };
   return (
     <div className="  bg-black-500 opacity-85 fixed inset-0 z-50 flex items-center justify-center">
@@ -39,17 +89,14 @@ function Signin({ onClose }) {
             placeholder="password"
           />
         </form>
-        message && <p className="text-red-500 mt-2">{message}</p>
+        {message && <p className="text-red-500 mt-2">{message}</p>}
         <button
-            onClick={handleButtonClick}
+          onClick={handleButtonClick}
           className=" text-white w-full mt-6 bg-red-600 hover:bg-red-700 font-semibold py-3 rounded-md cursor-pointer"
         >
           Sign In
         </button>
-       
-
         <h2 className="text-center my-4 text-[#aaa]">OR</h2>
-
         <div className="flex justify-between items-center mt-4 text-sm text-[#b3b3b3]">
           <label className="flex items-center gap-2">
             <input
@@ -64,10 +111,11 @@ function Signin({ onClose }) {
           </a>
         </div>
         <div className="mt-6 text-sm text-[#b3b3b3]">
-          New to Netflix?{" "}
-          <a href="#" className="text-white hover:underline font-semibold">
-            Sign up now.
-          </a>
+          {isSignInForm ? "New to Netflix?" : "Already have an account?"}{" "}
+          <span onClick={() => setIsSignInForm(!isSignInForm)}>
+            {" "}
+            {isSignInForm ? "Sign up now." : "Sign in now."}
+          </span>
         </div>
         <p className="mt-4 text-xs text-[#8c8c8c] leading-tight">
           This page is protected by Google reCAPTCHA to ensure you're not a bot.{" "}

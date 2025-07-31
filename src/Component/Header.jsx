@@ -1,6 +1,6 @@
 import Signin from "./Singin";
 
-function Header({onSignInClick}) {
+function Header({ onSignInClick }) {
   return (
     <div>
       <div className="absolute top-0 left-0 w-full z-30 bg-gradient-to-b from-black via-transparent to-transparent px-6 py-4 flex justify-between items-center">
@@ -18,13 +18,14 @@ function Header({onSignInClick}) {
               Hindi
             </option>
           </select>
-          <button onClick={onSignInClick}
-           className="bg-red-600 text-white px-4 py-1 rounded font-semibold hover:bg-red-700 cursor-pointer transition duration-200 ">
+          <button
+            onClick={onSignInClick}
+            className="bg-red-600 text-white px-4 py-1 rounded font-semibold hover:bg-red-700 cursor-pointer transition duration-200 "
+          >
             Sign in
           </button>
         </div>
       </div>
-
     </div>
   );
 }
