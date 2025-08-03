@@ -1,26 +1,50 @@
 import { useNavigate } from "react-router-dom";
 import Body from "./Body";
-
-import {  signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../Utils/firebase";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { addUser, removeUser } from "../Utils/userSlice";
+import {  Logo } from "../Utils/constants";
+import useNowPlayingMovies from "../Hooks/useNowPlayingMovies";
+import MainContainer from "./MainContainer";
+import SecondaryContainer from "./SecondaryContainer";
 
 function Browser() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleSignOut = () => {
-    signOut(auth).then(() => {
-   navigate("/")
-    }).catch((error) => {
-      navigate("/error")
-    });
+    signOut(auth)
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => {
+        navigate("/error");
+      });
   };
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      /*sign in  */ if (user) {
+        const { uid, email, displayName } = user;
+        dispatch(addUser({ uid: uid, email: email, displayName: displayName }));
+        // console.log("Current User from Firebase:", user);
+      } /*Sign out */ else {
+        dispatch(removeUser());
+      }
+    });
+    // unsubscribe when component unmounts
+    return () => unsubscribe();
+  }, []);
+
+  // Fetch data from tmdb api  
+  useNowPlayingMovies();
 
   return (
     <div>
-      
       <div className="absolute top-0 left-0 w-full z-30 bg-gradient-to-b from-black via-transparent to-transparent px-6 py-4 flex justify-between items-center">
         <img
           className="w-36 sm:w-40 md:w-48 lg:w-52 "
-          src="https://help.nflxext.com/helpcenter/OneTrust/oneTrust_production_2025-07-01/consent/87b6a5c0-0104-4e96-a291-092c11350111/01938dc4-59b3-7bbc-b635-c4131030e85f/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
+          src={Logo}
           alt="Netfix-logo"
         />
         <div>
@@ -32,6 +56,8 @@ function Browser() {
           </button>
         </div>
       </div>
+      <MainContainer/>
+      <SecondaryContainer/>
     </div>
   );
 }

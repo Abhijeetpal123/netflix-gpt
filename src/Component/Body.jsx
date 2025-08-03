@@ -22,17 +22,7 @@ function Body({ onSignInClick }) {
     },
   ]);
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      /*sign in  */ if (user) {
-        const { uid, email, displayName } = user;
-        dispatch(addUser({ uid: uid, email: email, displayName: displayName }));
-        console.log("Current User from Firebase:", user);
-      } /*Sign out */ else {
-        dispatch(removeUser());
-      }
-    });
-  }, []);
+ 
 
   return (
     <div>

@@ -32,7 +32,7 @@ function Signin({ onClose }) {
       )
         .then((userCredential) => {
           const user = userCredential.user;
-          console.log(user);
+          // console.log(user);
           navigate("/browser");
         })
         .catch((error) => {
@@ -52,7 +52,7 @@ function Signin({ onClose }) {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
+          // console.log(user);
           navigate("/browser");
         })
         .catch((error) => {
