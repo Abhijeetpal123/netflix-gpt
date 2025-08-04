@@ -27,9 +27,14 @@
 - Update store the trailer with video data
 - Embedded the youtube video an dmake it auto play and mute
 - Tailwind classes to make main conatiner look awesome
+- Build Secondary Component 
+
+
+
+
+
 
 # Featues
-
 - Login/Signup
   - Login In/Sign In form
   - redirect to browse page
@@ -52,5 +57,9 @@
 - video conatiner
 - video title
 - Secondary Container
-- Movie list
-- card ....
+ - Movie list 
+ - Movie Card*n 
+ - Movie List - Now Playing 
+ - Movie List - Trending 
+ - Movie List - Horror 
+

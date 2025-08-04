@@ -9,6 +9,9 @@ import {  Logo } from "../Utils/constants";
 import useNowPlayingMovies from "../Hooks/useNowPlayingMovies";
 import MainContainer from "./MainContainer";
 import SecondaryContainer from "./SecondaryContainer";
+import usePopularMovies from "../Hooks/usePopularMovies";
+import useTopRatedMovies from "../Hooks/useTopRatedMovies";
+import useUpcomingMovies from "../Hooks/useUpcomingMovie";
 
 function Browser() {
   const navigate = useNavigate();
@@ -38,6 +41,9 @@ function Browser() {
 
   // Fetch data from tmdb api  
   useNowPlayingMovies();
+  usePopularMovies();
+  useTopRatedMovies();
+  useUpcomingMovies();
 
   return (
     <div>
