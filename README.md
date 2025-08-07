@@ -27,14 +27,19 @@
 - Update store the trailer with video data
 - Embedded the youtube video an dmake it auto play and mute
 - Tailwind classes to make main conatiner look awesome
-- Build Secondary Component 
-
-
-
-
-
+- Build Secondary Component
+- Build Movie List
+- Build Movie Cart
+- TMDB Image CDN url
+- Made the browse page amazing with tailwind css
+- Usepopular,UseTopRated,UseUpcoming Movie Custom Hooks
+- Build GPT Search Features
+- GPT Search Page
+- GPT Search Bar
+- Multi-Language Feature in our App
 
 # Featues
+
 - Login/Signup
   - Login In/Sign In form
   - redirect to browse page
@@ -57,9 +62,8 @@
 - video conatiner
 - video title
 - Secondary Container
- - Movie list 
- - Movie Card*n 
- - Movie List - Now Playing 
- - Movie List - Trending 
- - Movie List - Horror 
-
+- Movie list
+- Movie Card\*n
+- Movie List - Now Playing
+- Movie List - Trending
+- Movie List - Horror
